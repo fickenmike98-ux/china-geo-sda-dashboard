@@ -11,3 +11,7 @@ __pycache__/
 # If the DB is for the public Streamlit app, don't ignore it yet.
 # If it's private/huge, uncomment the line below:
 # *.db
+
+*.py
+!Streamlit_V41.py
+# (The '!' means 'except this one')
