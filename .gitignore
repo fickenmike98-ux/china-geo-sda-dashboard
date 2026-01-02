@@ -13,5 +13,5 @@ __pycache__/
 # *.db
 
 *.py
-!Streamlit_V41.py
+!streamlit_app.py
 # (The '!' means 'except this one')

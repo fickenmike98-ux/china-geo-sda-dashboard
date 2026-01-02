@@ -124,22 +124,44 @@ for i, d in enumerate(data[::-1]):
     ), row=1, col=1)
 
 # Plot 2: Intensity (Stacked Bar)
-int_labels = ['0-1', '1-2', '2-5', '5-15', '15+']
+int_labels = ['0-1 m/s', '1-2 m/s', '2-5 m/s', '5-15 m/s', '15+ m/s']
 colors = ['#2ecc71', '#82e0aa', '#f1c40f', '#e67e22', '#e74c3c']
+
 for b_idx in range(5):
     fig.add_trace(go.Bar(
-        y=names, x=[d['int_counts'][b_idx] for d in data[::-1]],
-        name=int_labels[b_idx], orientation='h',
-        marker_color=colors[b_idx], showlegend=True
+        y=names,
+        x=[d['int_counts'][b_idx] for d in data[::-1]],
+        name=int_labels[b_idx],
+        orientation='h',
+        marker_color=colors[b_idx],
+        legendgroup="intensity", # Group these together
+        showlegend=True          # Force show the key for these
     ), row=1, col=2)
 
 # Plot 3: Delta-V
 fig.add_trace(go.Bar(
-    y=names, x=[d['total_dv'] for d in data[::-1]],
-    orientation='h', marker_color='#f85149', name="Total Delta-V"
+    y=names,
+    x=[d['total_dv'] for d in data[::-1]],
+    orientation='h',
+    marker_color='#f85149',
+    name="Total Mission ΔV",
+    showlegend=False # Hide this one to keep the sidebar clean
 ), row=1, col=3)
 
-fig.update_layout(template="plotly_dark", height=600, barmode='stack', margin=dict(l=20, r=20, t=50, b=20))
+# Update layout to position the legend better
+fig.update_layout(
+    template="plotly_dark",
+    height=600,
+    barmode='stack',
+    legend=dict(
+        orientation="h",   # Horizontal legend
+        yanchor="bottom",
+        y=-0.2,            # Move it below the charts
+        xanchor="center",
+        x=0.5
+    ),
+    margin=dict(l=20, r=20, t=80, b=100) # Add bottom margin for the legend
+)
 st.plotly_chart(fig, use_container_width=True)
 
 st.markdown(
