@@ -1,17 +1,13 @@
-# Python specifics
-__pycache__/
+# Ignore the virtual environment folders
 .venv/
-.env
+venv/
+env/
+__pycache__/
+
+# Ignore clutter
 *.pyc
-
-# IDE specifics
 .idea/
-
-# Data (Decide if you want to push your DB or not)
-# If the DB is for the public Streamlit app, don't ignore it yet.
-# If it's private/huge, uncomment the line below:
-# *.db
-
-*.py
-!streamlit_app.py
-# (The '!' means 'except this one')
+.vscode/
+*.csv
+*.txt
+!requirements.txt
